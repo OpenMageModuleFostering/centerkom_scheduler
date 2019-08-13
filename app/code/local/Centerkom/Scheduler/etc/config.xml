@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Centerkom_Scheduler>
+            <version>0.2.0</version>
+        </Centerkom_Scheduler>
+    </modules>
+    <global>
+        <blocks>
+            <scheduler>
+                <class>Centerkom_Scheduler_Block</class>
+            </scheduler>
+        </blocks>    
+        <helpers>
+            <scheduler>
+                <class>Centerkom_Scheduler_Helper</class>
+            </scheduler>
+        </helpers>
+        <models>
+            <scheduler>
+                <class>Centerkom_Scheduler_Model</class>
+                <resourceModel>scheduler_mysql4</resourceModel>
+            </scheduler>
+            <scheduler_mysql4>
+			     <class>Centerkom_Scheduler_Model_Mysql4</class>
+			     <entities>
+			         <scheduler>
+			           <table>centerkom_scheduler</table>
+			         </scheduler>
+			      </entities>
+			</scheduler_mysql4>
+        </models> 
+        <resources>
+	        <scheduler>
+	            <setup>
+	                <module>Centerkom_Scheduler</module>
+	                <class>Centerkom_Scheduler_Model_Resource_Setup</class>
+	            </setup>
+	        </scheduler>
+	        <scheduler_write>
+	            <connection>
+	                <use>core_write</use>
+	            </connection>
+	        </scheduler_write>	
+	        <scheduler_read>
+	            <connection>
+	                <use>core_read</use>
+	            </connection>
+	        </scheduler_read>
+    	</resources>
+    </global>
+    <admin>
+        <routers>
+            <scheduler>
+                <use>admin</use>
+                <args>
+                    <module>Centerkom_Scheduler</module>
+                    <frontName>scheduler</frontName>
+                </args>
+            </scheduler>
+        </routers>
+    </admin>   
+    <adminhtml>
+        <menu>
+            <system>
+                <children>
+                    <scheduler_adminform translate="title" module="scheduler">
+                        <title>Scheduler</title>
+                        <children>
+							<scheduler_adminform_cron translate="title">
+								<title>System jobs View</title>
+								<sort_order>20</sort_order>
+                        		<action>scheduler/adminhtml_scheduler</action>
+							</scheduler_adminform_cron>
+							<scheduler_adminform_user translate="title">
+								<title>User jobs View</title>
+								<sort_order>20</sort_order>
+                        		<action>scheduler/adminhtml_myscheduler</action>
+							</scheduler_adminform_user>	
+							<scheduler_adminform_config translate="title">
+								<title>System cron list</title>
+								<sort_order>20</sort_order>
+                        		<action>scheduler/adminhtml_config</action>
+							</scheduler_adminform_config>													
+						</children>
+                    </scheduler_adminform>
+                </children>
+            </system>
+        </menu>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <scheduler_adminform>
+                                    <title>Scheduler</title>
+                                </scheduler_adminform>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+    
+	<crontab>
+		<jobs>
+			<scheduler_run>
+				<schedule><cron_expr>*/5 * * * *</cron_expr></schedule>
+				<run><model>scheduler/scheduler::run</model></run>
+			</scheduler_run>
+		</jobs>			
+	</crontab>    
+</config>
