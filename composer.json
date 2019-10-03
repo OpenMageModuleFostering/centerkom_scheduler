@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/centerkom_scheduler",
+    "name": "OpenMageModuleFostering\/centerkom_scheduler",
     "type": "magento-module",
     "license": "OSL",
     "homepage": "",
-    "description": "View list your scheduler/cron tasks and add your simple task. ",
+    "description": "View list your scheduler\/cron tasks and add your simple task. ",
     "authors": [
-    {
-        "name": "Jaroslaw",
-        "email": "jarek@herisz.pl"
-    }
-],
+        {
+            "name": "Jaroslaw",
+            "email": "jarek@herisz.pl"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
